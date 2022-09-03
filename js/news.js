@@ -13,6 +13,8 @@ const loadCategory = (categories) => {
   categories.forEach((category) => {
     categoryContainer.addEventListener("click", function (e) {
       if (e.target.innerText === category.category_name) {
+        toggleSpinner(true);
+        // start the spinner
         showCategoryData(category.category_id);
       }
     });
@@ -32,19 +34,10 @@ const showCategoryData = async (category_id) => {
 };
 
 const loadCategoryData = (newses) => {
-  // const newsItem = document.getElementById("news-item");
-  // const newsImg = document.getElementById("news-img");
-  // const newsHeading = document.getElementById("news-heading");
-  // const newsText = document.getElementById("news-text");
   const displayNews = document.getElementById("display-news");
   displayNews.textContent = "";
   newses.forEach((news) => {
     // console.log(news);
-    console.log(news);
-    // newsItem.classList.remove("d-none");
-    // newsImg.src = `${news.image_url}`;
-    // newsHeading.innerHTML = `${news.title}`;
-
     const newDiv = document.createElement("div");
     newDiv.classList.add("card", "my-5", "border-0", "shadow-lg", "rounded-3");
     newDiv.innerHTML = `
@@ -69,7 +62,7 @@ const loadCategoryData = (newses) => {
               <div class="me-2">
                 <img
                   style="height: 30px; border-radius: 50%; width: 30px"
-                  src=""
+                  src=${news.author.img}
                   alt=""
                 />
               </div>
@@ -82,9 +75,13 @@ const loadCategoryData = (newses) => {
             </div>
             <div id="views">
               <div class="count-people">
-                <i class="fa-regular fa-eye"></i> 1.5M
+                <i class="fa-regular fa-eye me-2"></i> 1.5M
               </div>
             </div>
+            <button id="show-details" class="btn btn-primary ms-5" onclick="showNewsDetails('${
+              news._id
+            }')"  data-bs-toggle="modal"
+            data-bs-target="#newsModal">Show Details</button>
           </div>
         </div>
       </div>
@@ -92,6 +89,38 @@ const loadCategoryData = (newses) => {
     `;
     displayNews.appendChild(newDiv);
   });
+  console.log("all data loaded");
+  toggleSpinner(false);
+};
+
+const showNewsDetails = async (news_id) => {
+  const url = `https://openapi.programming-hero.com/api/news/${news_id}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  loadNewsDetails(data.data[0]);
+};
+const loadNewsDetails = (details) => {
+  console.log(details);
+  const modalTitle = document.getElementById("modal-title");
+  modalTitle.innerHTML = ` ${details.title}`;
+  const modalBody = document.getElementById("modal-body");
+  modalBody.innerHTML = `
+  Author : ${details.author.name}</br>
+  Released Date : ${details.author.published_date}</br>
+  Rating : ${details.rating.badge}</br>
+  Point :  ${details.rating.number}</br>
+  Views : ${details.total_view}
+  `;
+};
+
+// function for spinner
+const toggleSpinner = (isLoading) => {
+  const spinnerIcon = document.getElementById("spinner-icon");
+  if (isLoading) {
+    spinnerIcon.classList.remove("d-none");
+  } else {
+    spinnerIcon.classList.add("d-none");
+  }
 };
 
 showCategory();
