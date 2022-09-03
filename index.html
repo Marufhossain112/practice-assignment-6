@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Today</title>
+    <!-- bootstrap link -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <!-- fontawesome link -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- custom css link -->
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- header starts here -->
+      <header class="d-flex justify-content-between mt-4">
+        <nav>
+          <span class="news-title me-2">News</span>
+          <span class="news-today">Today</span>
+        </nav>
+        <nav>
+          <ul class="d-flex list-unstyled">
+            <li class="me-4 news">News</li>
+            <li>Blog</li>
+          </ul>
+        </nav>
+      </header>
+      <hr />
+      <!-- main starts here -->
+      <section class="category">
+        <div>
+          <ul id="category-container" class="d-flex list-unstyled"></ul>
+        </div>
+      </section>
+
+      <!-- display news here -->
+      <section class="displayNews">
+        <div id="display-news" class="pt-5">
+          <div class="card mb-3">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="..." class="img-fluid rounded-start" alt="..." />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">
+                    This is a wider card with supporting text below as a natural
+                    lead-in to additional content. This content is a little bit
+                    longer.
+                  </p>
+                  <div class="d-flex">
+                    <div class="card-text d-flex">
+                         <div id="viewers">
+                      <h2>name</h2>
+                      <p>date</p>
+                    </div>
+                    </div>
+                    <div id="views">
+                      <div class="count-eye">
+                        <i class="fa-regular fa-eye"></i>
+                      </div>
+                      <div class="count-people"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- js file link -->
+    <script src="./js/news.js"></script>
+  </body>
+</html>
